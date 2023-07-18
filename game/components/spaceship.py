@@ -5,7 +5,7 @@ from game.utils.constants import SCREEN_HEIGHT, SCREEN_WIDTH, SPACESHIP
 
 class Spaceship(Sprite): 
     X_POS = (SCREEN_HEIGHT // 2) + 200
-    Y_POS = 500
+    Y_POS = 520
                                                          #dimensiones
     def __init__(self): #inicializamos todo  #imagen    #ancho  #alto
         self.image = pygame.transform.scale(SPACESHIP, (60, 50))

@@ -25,11 +25,14 @@ class Enemy2(Sprite):
         self.rect.y += self.speed_y
             
         if self.rect.y >= SCREEN_HEIGHT:  # Verificar si el avión ha pasado el límite inferior
-            self.rect.y = random.choice(self.Y_POS_LIST) 
+            #self.rect.y = random.choice(self.Y_POS_LIST) 
+            enemies.remove(self)
 
-        
         if self.rect.x >= 0:
             self.rect.x -= self.speed_x
+        
+        #if self.rect.x <= self.speed_x:
+           # self.rect.x -= 0
        
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
