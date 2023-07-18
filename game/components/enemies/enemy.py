@@ -31,7 +31,7 @@ class Enemy(Sprite):
         self.move_x = random.randint(30, 50)
         self.moving_index = 0
 
-        self.shootin_time = random.randint(30, 50)# Nos va ayudar controlar cuando hemos disparado la bala
+        self.shooting_time = random.randint(30, 50)# Nos va ayudar controlar cuando hemos disparado la bala
 
     def update(self, enemies, bullet_manager):
         self.rect.y += self.speed_y
@@ -58,9 +58,9 @@ class Enemy(Sprite):
 
     def shoot(self, bullet_manager):
         current_time = pygame.time.get_ticks() #reloj
-        if self.shootin_time <= current_time:
-            bullet_manager.add_bullet(self)
-            self.shooting_time += current_time + random.randint(30, 50)
+        if self.shooting_time <= current_time:
+           bullet_manager.add_bullet(self)
+           self.shooting_time += current_time + random.randint(30, 50)
 
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
