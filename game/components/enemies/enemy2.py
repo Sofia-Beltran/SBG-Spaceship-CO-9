@@ -29,16 +29,10 @@ class Enemy2(Sprite):
         if self.rect.y >= SCREEN_HEIGHT:  # Verificar si el avión ha pasado el límite inferior
             #self.rect.y = random.choice(self.Y_POS_LIST) 
             enemies.remove(self)
-
-    def move_left(self):
-        self.rect.x -= self.speed_x
-        if self.rect.x <= 0:  # Comprobar si el enemigo ha chocado con la pared izquierda
-            self.rect.y += self.speed_y  # Hacer que el enemigo baje 
         
-    def move_right(self):
-        self.rect.x += self.speed_x
-        if self.rect.x >= SCREEN_WIDTH - self.rect.width:  # Comprobar si el enemigo ha chocado con la pared derecha
-            self.rect.y += self.speed_y  # Hacer que el enemigo baje
+        if self.rect.x > 0:
+            self.rect.x -= self.speed_x
+            
 
     def shoot(self, bullet_manager):
         current_time = pygame.time.get_ticks() #reloj

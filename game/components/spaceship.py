@@ -1,9 +1,6 @@
 import random
 import pygame
 from pygame.sprite import Sprite
-from game.components.bullets.bullet_manager import BulletManager
-from game.components.bullets.bullet_manager
-
 from game.utils.constants import PLAYER_TYPE, SCREEN_HEIGHT, SCREEN_WIDTH, SPACESHIP
 
 class Spaceship(Sprite): 
@@ -19,7 +16,6 @@ class Spaceship(Sprite):
         self.shooting_time = random.randint(30, 50)# Nos va ayudar controlar cuando hemos disparado la bala
     
     def update(self, user_input, bullet_manager): #El estado de nuestro objeto
-        self.shoot(bullet_manager)
         if user_input[pygame.K_LEFT]:
             self.move_left()
         elif user_input[pygame.K_RIGHT]:
@@ -28,7 +24,8 @@ class Spaceship(Sprite):
             self.move_down()
         elif user_input [pygame.K_UP]:
             self.move_up()
-
+        if user_input [pygame.K_SPACE]:
+            self.shoot(bullet_manager)
          
     def move_left(self): #izquierda
         if self.rect.left < 0:
@@ -49,11 +46,8 @@ class Spaceship(Sprite):
             self.rect.y -= 10
     
     def shoot(self, bullet_manager):
-        BulletManager(bullet_manager)
-        current_time = pygame.time.get_ticks() #reloj
-        if self.shooting_time <= current_time:
-           bullet_manager.add_bullet(self)
-           self.shooting_time += current_time + random.randint(30, 50)
+        bullet_manager.add_bullet(self)
+           
 
     def draw(self, screen): #Ayudar a dibujar el avion 
         screen.blit(self.image, (self.rect.x, self.rect.y))

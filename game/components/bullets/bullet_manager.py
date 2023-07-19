@@ -1,6 +1,3 @@
-
-import pygame
-from game.components import spaceship
 from game.components.bullets.bullet import Bullet
 from game.utils.constants import ENEMY_TYPE, PLAYER_TYPE
 
@@ -8,20 +5,33 @@ from game.utils.constants import ENEMY_TYPE, PLAYER_TYPE
 class BulletManager:
     def __init__(self):
         self.enemy_bullets = []
-        self.player_bullets = []
+        self.bullets = []
+        
 
-    def update(self):
+    def update(self, game):
+        for bullet in self.bullets:
+            bullet.update(self.bullets)
+            for enemy in game.enemy_manager.enemies:
+                if bullet.rect.colliderect(enemy.rect):
+                    game.enemy_manager.enemies.remove(enemy)
+                    self.bullets.remove(bullet)
+                    game.score += 1
+
         for enemy_bullet in self.enemy_bullets:
             enemy_bullet.update(self.enemy_bullets)
+            if enemy_bullet.rect.colliderect(game.player.rect):
+                game.playing = False
+                game.death_count += 1
+                print(game.death_count)
 
-        for player_bullet in self.player_bullets:
-            player_bullet.update(self.player_bullets)
+        for player_bullet in self.bullets:
+            player_bullet.update(self.bullets)
 
     def draw(self, screen):
-        for enemy_bullet in self.enemy_bullets:
+        for enemy_bullet in self.enemy_bullets + self.bullets: #combino las listas
             enemy_bullet.draw(screen)
         
-        for player_bullet in self.player_bullets:
+        for player_bullet in self.bullets:
             player_bullet.draw(screen)
 
     def add_bullet(self, spaceschip):
@@ -29,10 +39,6 @@ class BulletManager:
             self.enemy_bullets.append(Bullet(spaceschip))
             
         if spaceschip.type == PLAYER_TYPE:
-            self.player_bullets.append(Bullet(spaceschip))
+            self.bullets.append(Bullet(spaceschip))
 
-    def key_bullet(self, event):    
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                # Llamar al método add_bullet para el jugador
-                self.add_bullet(spaceship)
+   
