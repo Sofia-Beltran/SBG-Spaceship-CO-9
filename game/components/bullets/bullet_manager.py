@@ -16,13 +16,14 @@ class BulletManager:
                     game.enemy_manager.enemies.remove(enemy)
                     self.bullets.remove(bullet)
                     game.score += 1
+                 
 
         for enemy_bullet in self.enemy_bullets:
             enemy_bullet.update(self.enemy_bullets)
             if enemy_bullet.rect.colliderect(game.player.rect):
                 game.playing = False
                 game.death_count += 1
-                print(game.death_count)
+                
 
         for player_bullet in self.bullets:
             player_bullet.update(self.bullets)

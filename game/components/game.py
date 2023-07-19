@@ -1,3 +1,4 @@
+import os
 import pygame
 
 from game.components.bullets.bullet_manager import BulletManager
@@ -23,10 +24,11 @@ class Game:
         self.enemy_manager = EnemyManager()
         self.bullet_manager = BulletManager()
 
-        self.menu = Menu("Press any key to start...")
+        self.menu = Menu("Press any key to start")
         self.score = 0
         self.death_count = 0
-        
+        self.max_score = 0
+
 
     def run(self):
         # Game loop: events - update - draw
@@ -41,10 +43,16 @@ class Game:
         self.playing = True
         self.enemy_manager.reset()
         self.score = 0
+        self.death_count = 0
+        if not self.playing:
+            self.death_count += 1
+            self.play()
+
         while self.playing:
             self.events()
             self.update()
             self.draw()
+        
         
     def events(self):
         for event in pygame.event.get():
@@ -56,7 +64,11 @@ class Game:
         self.player.update(user_input, self.bullet_manager)
         self.enemy_manager.update(self)
         self.bullet_manager.update(self) 
+
+        if self.score > self.max_score:
+            self.max_score = self.score
         
+       
 
     def draw(self):
         self.clock.tick(FPS)
@@ -89,8 +101,8 @@ class Game:
 
     def show_menu(self):
         if self.death_count > 0:
-            self.menu.update_message("other message")
-            
+            self.menu.update_message(f"YOUR INFORMATION: Deaths: {self.death_count}, Score: {self.score}, Max Score: {self.max_score}")
+        
 
         self.menu.draw(self.screen)
         self.menu.events(self.on_close, self.play)
