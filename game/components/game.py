@@ -1,4 +1,4 @@
-import os
+
 import pygame
 
 from game.components.bullets.bullet_manager import BulletManager
@@ -31,7 +31,6 @@ class Game:
         self.death_count = 0
         self.max_score = 0
 
-
     def run(self):
         # Game loop: events - update - draw
         self.running = True
@@ -63,9 +62,11 @@ class Game:
         self.enemy_manager.update(self)
         self.bullet_manager.update(self) 
         self.power_up_manager.update(self)
+    
 
         if self.score > self.max_score:
             self.max_score = self.score
+        
         
        
 

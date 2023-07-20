@@ -22,9 +22,9 @@ class BulletManager:
             enemy_bullet.update(self.enemy_bullets)
             if enemy_bullet.rect.colliderect(game.player.rect):
                 self.enemy_bullets.remove(enemy_bullet)
-            if game.player.power_up_type != SHIELD_TYPE:  
-                game.playing = False
-            game.death_count += 1 
+                if game.player.power_up_type != SHIELD_TYPE:  
+                    game.playing = False
+                    game.death_count += 1 
                 
 
         for player_bullet in self.bullets:

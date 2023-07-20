@@ -14,8 +14,8 @@ class Enemy(Sprite):
                   #var        #var       #rango  #dese 50 hasta el ancho de mi pantalla
     X_POS_LIST = [x_pos for x_pos in range(50, SCREEN_WIDTH, 50)] #50 ultimo es mi contador que va en cincuenta
     Y_POS = 20
-    SPEED_X = 5
-    SPEED_Y = 3
+    SPEED_X = 4
+    SPEED_Y = 5
 
 
     def __init__(self):
@@ -31,7 +31,7 @@ class Enemy(Sprite):
         self.move_x = random.randint(30, 50)
         self.moving_index = 0
 
-        self.shooting_time = random.randint(30, 50)# Nos va ayudar controlar cuando hemos disparado la bala
+        self.shooting_time = random.randint(100, 100)# Nos va ayudar controlar cuando hemos disparado la bala
 
     def update(self, enemies, bullet_manager):
         self.rect.y += self.speed_y

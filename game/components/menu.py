@@ -1,6 +1,6 @@
 import pygame
 
-from game.utils.constants import FONT_STYLE, ICON, SCREEN_HEIGHT, SCREEN_WIDTH
+from game.utils.constants import FONT_STYLE, ICON,  SCREEN_HEIGHT, SCREEN_WIDTH
 
 
 class Menu:

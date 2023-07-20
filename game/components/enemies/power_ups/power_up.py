@@ -11,6 +11,8 @@ class PowerUp(Sprite):
         self.rect.x = random.randint(100, SCREEN_WIDTH -100)
         self.rect.y = 0
         self.spaceship_image = spaceschip_image
+        
+       
 
     def update(self, game_speed, power_ups):
         self.rect.y += game_speed 
