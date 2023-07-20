@@ -1,5 +1,5 @@
 from game.components.bullets.bullet import Bullet
-from game.utils.constants import ENEMY_TYPE, PLAYER_TYPE
+from game.utils.constants import ENEMY_TYPE, PLAYER_TYPE, SHIELD_TYPE
 
 
 class BulletManager:
@@ -21,8 +21,10 @@ class BulletManager:
         for enemy_bullet in self.enemy_bullets:
             enemy_bullet.update(self.enemy_bullets)
             if enemy_bullet.rect.colliderect(game.player.rect):
+                self.enemy_bullets.remove(enemy_bullet)
+            if game.player.power_up_type != SHIELD_TYPE:  
                 game.playing = False
-                game.death_count += 1
+            game.death_count += 1 
                 
 
         for player_bullet in self.bullets:
